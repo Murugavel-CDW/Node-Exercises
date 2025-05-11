@@ -15,12 +15,12 @@ class BuddyController {
         try {
             const { employeeID } = request.params; 
             const buddyData = await BuddyService.fetchBuddy(employeeID);
-            if (buddyData) {
-                response.status(200).send(buddyData);
-            } else {
-                response.status(404).send("User with given employee ID not found");
-            }
+            return buddyData;
         } catch (err) {
+            if (err instanceof CustomError) { // if the err is an instance of the CustomError class
+                response.status(err.statusCode).send(err.message);
+                return;
+            }
             response.status(500).send(`Internal server error: ${err.message}`);
         }
     }
@@ -31,7 +31,7 @@ class BuddyController {
             response.status(201).send("Buddy created");
         } catch (err) {
             if (err instanceof CustomError) {
-                response.status(err.status).send(err.message);
+                response.status(err.statusCode).send(err.message);
                 return;
             }
             response.status(500).send(`Internal server error: ${err.message}`);
@@ -45,7 +45,7 @@ class BuddyController {
             response.status(200).send("User Updated");
         } catch (err) {
             if (err instanceof CustomError) {
-                response.status(err.status).send(err.message);
+                response.status(err.statusCode).send(err.message);
                 return;
             }
             response.status(500).send(`Internal server error: ${err.message}`);
@@ -59,7 +59,7 @@ class BuddyController {
             response.status(200).send("User deleted");
         } catch (err) {
             if (err instanceof CustomError) {
-                response.status(err.status).send(err.message);
+                response.status(err.statusCode).send(err.message);
                 return;
             }
             response.status(500).send(`Internal server error: ${err.message}`);

@@ -1,7 +1,8 @@
+// Custom error class to return error and status code
 class CustomError extends Error {
-    constructor(message, status) {
+    constructor(message, statusCode) {
         super(message);
-        this.status = status;
+        this.statusCode = statusCode;
     }
 }
 
