@@ -5,14 +5,14 @@ const buddyRouter = express.Router();
 
 const buddyController = new BuddyController();
 
-buddyRouter.get('/', (request, response) => buddyController.fetchBuddies(request, response));
+buddyRouter.get('/', (request, response, next) => buddyController.fetchBuddies(request, response, next));
 
-buddyRouter.get('/:employeeID', (request, response) => buddyController.fetchBuddy(request, response));
+buddyRouter.get('/:employeeID', (request, response, next) => buddyController.fetchBuddy(request, response, next));
 
-buddyRouter.post('/', (request, response) => buddyController.addBuddy(request, response));
+buddyRouter.post('/', (request, response, next) => buddyController.addBuddy(request, response, next));
 
-buddyRouter.patch('/:employeeID', (request, response) => buddyController.updateBuddy(request, response));
+buddyRouter.patch('/:employeeID', (request, response, next) => buddyController.updateBuddy(request, response, next));
 
-buddyRouter.delete('/:employeeID', (request, response) => buddyController.removeBuddy(request, response));
+buddyRouter.delete('/:employeeID', (request, response, next) => buddyController.removeBuddy(request, response, next));
 
 export default buddyRouter;

@@ -1,68 +1,51 @@
-import CustomError from "../customError.js";
 import BuddyService from "../services/buddyService.js";
 
 class BuddyController {
-    fetchBuddies = async (request, response) => {
+    fetchBuddies = async (request, response, next) => {
         try {
             const buddiesData = await BuddyService.fetchBuddyList();
             response.status(200).send(buddiesData);
         } catch (err) {
-            response.status(500).send(`Internal server error: ${err.message}`);
+            next(err); // passing to the error handler middleware
         }
     }
 
-    fetchBuddy = async (request, response) => {
+    fetchBuddy = async (request, response, next) => {
         try {
             const { employeeID } = request.params; 
             const buddyData = await BuddyService.fetchBuddy(employeeID);
             return buddyData;
         } catch (err) {
-            if (err instanceof CustomError) { // if the err is an instance of the CustomError class
-                response.status(err.statusCode).send(err.message);
-                return;
-            }
-            response.status(500).send(`Internal server error: ${err.message}`);
+            next(err);
         }
     }
 
-    addBuddy = async (request, response) => {
+    addBuddy = async (request, response, next) => {
         try {
             await BuddyService.addBuddy(request.body);
             response.status(201).send("Buddy created");
         } catch (err) {
-            if (err instanceof CustomError) {
-                response.status(err.statusCode).send(err.message);
-                return;
-            }
-            response.status(500).send(`Internal server error: ${err.message}`);
+            next(err);
         }
     }
 
-    updateBuddy = async (request, response) => {
+    updateBuddy = async (request, response, next) => {
         try {
             const { employeeID } = request.params;
             await BuddyService.updateBuddy(employeeID, request.body);
             response.status(200).send("User Updated");
         } catch (err) {
-            if (err instanceof CustomError) {
-                response.status(err.statusCode).send(err.message);
-                return;
-            }
-            response.status(500).send(`Internal server error: ${err.message}`);
+            next(err);
         }
     }
 
-    removeBuddy = async (request, response) => {
+    removeBuddy = async (request, response, next) => {
         try {
             const { employeeID } = request.params;
             await BuddyService.removeBuddy(employeeID);
             response.status(200).send("User deleted");
         } catch (err) {
-            if (err instanceof CustomError) {
-                response.status(err.statusCode).send(err.message);
-                return;
-            }
-            response.status(500).send(`Internal server error: ${err.message}`);
+            next(err);
         }
     }
 }
