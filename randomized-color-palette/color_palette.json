@@ -1,0 +1,353 @@
+[
+  {
+    "color": "peacock",
+    "code": {
+      "hex": "#33A1C9"
+    },
+    "id": 142
+  },
+
+  {
+    "color": "lightblue",
+    "code": {
+      "hex": "#ADD8E6"
+    },
+    "id": 143
+  },
+
+  {
+    "color": "lightblue 1",
+    "code": {
+      "hex": "#BFEFFF"
+    },
+    "id": 144
+  },
+
+  {
+    "color": "lightblue 2",
+    "code": {
+      "hex": "#B2DFEE"
+    },
+    "id": 145
+  },
+
+  {
+    "color": "lightblue 3",
+    "code": {
+      "hex": "#9AC0CD"
+    },
+    "id": 146
+  },
+
+  {
+    "color": "lightblue 4",
+    "code": {
+      "hex": "#68838B"
+    },
+    "id": 147
+  },
+
+  {
+    "color": "powderblue",
+    "code": {
+      "hex": "#B0E0E6"
+    },
+    "id": 148
+  },
+
+  {
+    "color": "cadetblue 1",
+    "code": {
+      "hex": "#98F5FF"
+    },
+    "id": 149
+  },
+
+  {
+    "color": "cadetblue 2",
+    "code": {
+      "hex": "#8EE5EE"
+    },
+    "id": 150
+  },
+
+  {
+    "color": "cadetblue 3",
+    "code": {
+      "hex": "#7AC5CD"
+    },
+    "id": 151
+  },
+
+  {
+    "color": "cadetblue 4",
+    "code": {
+      "hex": "#53868B"
+    },
+    "id": 152
+  },
+
+  {
+    "color": "turquoise 1",
+    "code": {
+      "hex": "#00F5FF"
+    },
+    "id": 153
+  },
+
+  {
+    "color": "turquoise 2",
+    "code": {
+      "hex": "#00E5EE"
+    },
+    "id": 154
+  },
+
+  {
+    "color": "turquoise 3",
+    "code": {
+      "hex": "#00C5CD"
+    },
+    "id": 155
+  },
+
+  {
+    "color": "turquoise 4",
+    "code": {
+      "hex": "#00868B"
+    },
+    "id": 156
+  },
+
+  {
+    "color": "cadetblue",
+    "code": {
+      "hex": "#5F9EA0"
+    },
+    "id": 157
+  },
+
+  {
+    "color": "darkturquoise",
+    "code": {
+      "hex": "#00CED1"
+    },
+    "id": 158
+  },
+
+  {
+    "color": "azure 1 (azure)",
+    "code": {
+      "hex": "#F0FFFF"
+    },
+    "id": 159
+  },
+
+  {
+    "color": "azure 2",
+    "code": {
+      "hex": "#E0EEEE"
+    },
+    "id": 160
+  },
+
+  {
+    "color": "azure 3",
+    "code": {
+      "hex": "#C1CDCD"
+    },
+    "id": 161
+  },
+
+  {
+    "color": "azure 4",
+    "code": {
+      "hex": "#838B8B"
+    },
+    "id": 162
+  },
+
+  {
+    "color": "lightcyan 1 (lightcyan)",
+    "code": {
+      "hex": "#E0FFFF"
+    },
+    "id": 163
+  },
+
+  {
+    "color": "lightcyan 2",
+    "code": {
+      "hex": "#D1EEEE"
+    },
+    "id": 164
+  },
+
+  {
+    "color": "lightcyan 3",
+    "code": {
+      "hex": "#B4CDCD"
+    },
+    "id": 165
+  },
+
+  {
+    "color": "lightcyan 4",
+    "code": {
+      "hex": "#7A8B8B"
+    },
+    "id": 166
+  },
+
+  {
+    "color": "paleturquoise 1",
+    "code": {
+      "hex": "#BBFFFF"
+    },
+    "id": 167
+  },
+
+  {
+    "color": "paleturquoise 2 (paleturquoise)",
+    "code": {
+      "hex": "#AEEEEE"
+    },
+    "id": 168
+  },
+
+  {
+    "color": "paleturquoise 3",
+    "code": {
+      "hex": "#96CDCD"
+    },
+    "id": 169
+  },
+
+  {
+    "color": "paleturquoise 4",
+    "code": {
+      "hex": "#668B8B"
+    },
+    "id": 170
+  },
+
+  {
+    "color": "darkslategray",
+    "code": {
+      "hex": "#2F4F4F"
+    },
+    "id": 171
+  },
+
+  {
+    "color": "darkslategray 1",
+    "code": {
+      "hex": "#97FFFF"
+    },
+    "id": 172
+  },
+
+  {
+    "color": "darkslategray 2",
+    "code": {
+      "hex": "#8DEEEE"
+    },
+    "id": 173
+  },
+
+  {
+    "color": "darkslategray 3",
+    "code": {
+      "hex": "#79CDCD"
+    },
+    "id": 174
+  },
+
+  {
+    "color": "darkslategray 4",
+    "code": {
+      "hex": "#528B8B"
+    },
+    "id": 175
+  },
+
+  {
+    "color": "cyan / aqua*",
+    "code": {
+      "hex": "#00FFFF"
+    },
+    "id": 176
+  },
+
+  {
+    "color": "cyan 2",
+    "code": {
+      "hex": "#00EEEE"
+    },
+    "id": 177
+  },
+
+  {
+    "color": "cyan 3",
+    "code": {
+      "hex": "#00CDCD"
+    },
+    "id": 178
+  },
+
+  {
+    "color": "cyan 4 (darkcyan)",
+    "code": {
+      "hex": "#008B8B"
+    },
+    "id": 179
+  },
+
+  {
+    "color": "teal*",
+    "code": {
+      "hex": "#008080"
+    },
+    "id": 180
+  },
+
+  {
+    "color": "mediumturquoise",
+    "code": {
+      "hex": "#48D1CC"
+    },
+    "id": 181
+  },
+
+  {
+    "color": "lightseagreen",
+    "code": {
+      "hex": "#20B2AA"
+    },
+    "id": 182
+  },
+
+  {
+    "color": "manganeseblue",
+    "code": {
+      "hex": "#03A89E"
+    },
+    "id": 183
+  },
+
+  {
+    "color": "turquoise",
+    "code": {
+      "hex": "#40E0D0"
+    },
+    "id": 184
+  },
+
+  {
+    "color": "coldgrey",
+    "code": {
+      "hex": "#808A87"
+    },
+    "id": 185
+  }
+]
