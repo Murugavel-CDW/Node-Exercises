@@ -1,4 +1,5 @@
 import fs from 'fs/promises';
+import ShortUniqueId from 'short-unique-id';
 import CustomError from '../customError.js';
 
 class BuddyService{
@@ -7,9 +8,10 @@ class BuddyService{
         return (await fs.readFile('./data/cdw_ace25_buddies.json')).toString(); // returns the string data from the read file
     }
 
-    // Private method to return a specific user
-    static #retrieveUser = (userID, userList) => {
-        const user = userList.find((userData) => userData.employeeId === userID);
+    // method to return a specific user
+    static retrieveUser = async (field, value) => {
+        const buddyList = JSON.parse(await BuddyService.#fetchDetailsList());
+        const user = buddyList.find((userData) => userData[field] === value);
         return user;
     }
 
@@ -24,9 +26,8 @@ class BuddyService{
         return buddyList;
     }
 
-    static fetchBuddy = async (employeeID) => {
-        const buddyList = JSON.parse(await BuddyService.#fetchDetailsList());
-        const buddyDetails = BuddyService.#retrieveUser(employeeID, buddyList);
+    static fetchBuddy = async (employeeId) => {
+        const buddyDetails = BuddyService.retrieveUser(employeeId);
         if (!buddyDetails) { // if no buddy is found
             throw new CustomError("User with no such employee ID found", 404);
         }
@@ -34,8 +35,8 @@ class BuddyService{
     }
 
     static addBuddy = async (userData) => {
-        const { employeeId, realName, nickName, dob, hobbies } = userData;
-        if (!employeeId || !realName || !nickName || !dob || !hobbies) { // if any of the required field is empty (i.e) undefined
+        const {realName, nickName, dob, hobbies } = userData;
+        if (!realName || !nickName || !dob || !hobbies) { // if any of the required field is empty (i.e) undefined
             throw new CustomError("All fields are required", 400);
         }
         const buddyList = JSON.parse(await BuddyService.#fetchDetailsList());
@@ -44,9 +45,9 @@ class BuddyService{
         await fs.writeFile('./data/cdw_ace25_buddies.json', dataToAppend); // overwriting the data into the file
     }
 
-    static updateBuddy = async (employeeID, userData) => {
+    static updateBuddy = async (employeeId, userData) => {
         const buddyList = JSON.parse(await BuddyService.#fetchDetailsList());
-        const buddyIndex = BuddyService.#retrieveUserIndex(employeeID, buddyList);
+        const buddyIndex = BuddyService.#retrieveUserIndex(employeeId, buddyList);
         if (buddyIndex == -1) {
             throw new CustomError("User with no such employee ID found", 404);
         }
@@ -56,9 +57,9 @@ class BuddyService{
         await fs.writeFile('./data/cdw_ace25_buddies.json', dataToAppend);
     }
 
-    static removeBuddy = async (employeeID) => {
+    static removeBuddy = async (employeeId) => {
         const buddyList = JSON.parse(await BuddyService.#fetchDetailsList());
-        const buddyIndex = BuddyService.#retrieveUserIndex(employeeID, buddyList);
+        const buddyIndex = BuddyService.#retrieveUserIndex(employeeId, buddyList);
         if (buddyIndex == -1) { // if user is not foundr
             throw new CustomError("User with no such employee ID found", 404);
         }
