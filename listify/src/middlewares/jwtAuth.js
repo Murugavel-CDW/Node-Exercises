@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { CustomError } from '../errors/CustomError.js';
 
 const jwtTokenAuth = (request, response, next) => {
-    const jwtToken = request.headers['Authorization'];
+    const jwtToken = request.headers['authorization'];
     if (!jwtToken) {
         return next(new CustomError("Invalid request", 400));
     }

@@ -3,16 +3,13 @@ import { addNewUser, fetchUserByField, generateToken } from '../services/user.se
 
 export const signupUser = async (request, response, next) => {
     try {
-        if (!request.body || !request.body.userName || !request.body.password) {
-            return response.status(400).send("All fields are required");
-        }
         const { userName, password } = request.body;
         const user = await fetchUserByField('userName', userName);
         if (user) {
             return response.status(409).send("User with name already exists");
         }
-        const token = generateToken(userName); 
-        await addNewUser(userName, password);
+        const addedUser = await addNewUser(userName, password);
+        const token = generateToken(addedUser.userId); 
         response.status(200).json({
             message: "User signed up successfully",
             token
@@ -36,7 +33,7 @@ export const signinUser = async (request, response, next) => {
         if (!isPasswordEqual) {
             return response.status(409).send("Invalid Password");
         }
-        const token = generateToken(userName); 
+        const token = generateToken(user.userId); 
         response.status(200).json({
             message: "User signed in successfully",
             token

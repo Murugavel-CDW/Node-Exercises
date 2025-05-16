@@ -27,7 +27,7 @@ app.use((error, request, response, next) => {
         message: `Request URL: ${request.url}; Error message: ${error.message}`
     });
     if (error instanceof CustomError) {
-        return response.status(error.statusCode).send(error.cause);
+        return response.status(error.statusCode).send(error.message);
     }
     response.status(500).send(`Internal server error: ${error.message}`);
 });
