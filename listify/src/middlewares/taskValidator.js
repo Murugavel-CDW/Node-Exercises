@@ -13,7 +13,7 @@ const taskValidator = (request, response, next) => {
     }
 
     if (dueDate && validator.isDate(dueDate) && validator.isBefore(validator.toDate(dueDate).toISOString(), new Date().toISOString())) {
-        return response.status(400).send("Due date is invalid");
+        return response.status(400).send("Due date is invalid. Enter date in format (YYYY-MM-DD)");
     }
 
     next();

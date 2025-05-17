@@ -1,5 +1,4 @@
-import { createNewTask, fetchTaskDetails, fetchUserTasks, removeTask, updateTaskDetails } from "../services/task.service.js";
-import { fileDetailsWrite } from "../utils/fileWrite.js";
+import { createNewTask, fetchTaskDetails, fetchUserTasks, filterTasks, removeTask, sortTasks, updateTaskDetails } from "../services/task.service.js";
 
 export const createTask = async (request, response, next) => {
     try {
@@ -16,8 +15,13 @@ export const createTask = async (request, response, next) => {
 
 export const fetchTasks = async (request, response, next) => {
     try {
+        const { sortBy, order = 'asc', ...filterCriteria} = request.query;
         const userId = request.userId;
-        const userCreatedTasks = await fetchUserTasks(userId);
+
+        let userCreatedTasks = await fetchUserTasks(userId);
+        userCreatedTasks = filterTasks(userCreatedTasks, filterCriteria);
+        userCreatedTasks = sortTasks(userCreatedTasks, sortBy, order);
+
         if (userCreatedTasks.length > 0) {
             response.status(200).send(userCreatedTasks);
         } else {

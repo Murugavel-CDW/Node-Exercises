@@ -1,3 +1,5 @@
+import validator from 'validator';
+import { CustomError } from '../errors/customError.js';
 import { fileDetailsRead } from "../utils/fileRead.js";
 import { fileDetailsWrite } from "../utils/fileWrite.js";
 import generateUniqueID from '../utils/generateID.js';
@@ -20,6 +22,43 @@ export const createNewTask = async (userId, taskData) => {
     };
     await fileDetailsWrite('tasks', newTask);
     return newTask;
+}
+
+export const filterTasks = (taskList, filterCriteria) => {
+    let filteredTasks = taskList;
+    const { title, priority, dueDate } = filterCriteria;
+    if (title) {
+        filteredTasks = filteredTasks.filter((task) => task.title.toLowerCase() === title.toLowerCase());
+    }
+
+    if (priority) {
+        filteredTasks = filteredTasks.filter((task) => task.priority === parseInt(priority));
+    }
+
+    if (dueDate) {
+        if (validator.isDate(dueDate)) {
+            filteredTasks = filteredTasks.filter((task) => task.dueDate === dueDate);
+        } else {
+            throw new CustomError("Invalid date format received. Expected format (YYYY-MM-DD)", 400);
+        }
+    }
+
+    return filteredTasks;
+}
+
+export const sortTasks = (taskList, orderBy, order) => {
+    if (orderBy) {
+        taskList.sort((firstTask, secondTask) => {
+            const valueA = firstTask[orderBy];
+            const valueB = secondTask[orderBy];
+            if (typeof valueA === 'string') {
+                return order === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
+            } else {
+                return order === 'asc' ? valueA - valueB : valueB - valueA;
+            }
+        });
+    }
+    return taskList;
 }
 
 export const fetchUserTasks = async (userId) => {
