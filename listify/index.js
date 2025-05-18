@@ -4,7 +4,7 @@ import 'dotenv/config';
 import userRouter from './src/routes/user.route.js';
 import taskRouter from './src/routes/task.route.js';
 import { logger } from './src/utils/logger.js';
-import { CustomError } from './src/errors/CustomError.js';
+import { CustomError } from './src/errors/customError.js';
 import logRequests from './src/middlewares/infoLogger.js';
 import jwtTokenAuth from './src/middlewares/jwtAuth.js';
 
