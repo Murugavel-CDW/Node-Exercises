@@ -28,7 +28,7 @@ export const filterTasks = (taskList, filterCriteria) => {
     let filteredTasks = taskList;
     const { title, priority, dueDate } = filterCriteria;
     if (title) {
-        filteredTasks = filteredTasks.filter((task) => task.title.toLowerCase() === title.toLowerCase());
+        filteredTasks = filteredTasks.filter((task) => task.title.toLowerCase().includes(title.toLowerCase()));
     }
 
     if (priority) {
@@ -44,6 +44,19 @@ export const filterTasks = (taskList, filterCriteria) => {
     }
 
     return filteredTasks;
+}
+
+export const sliceTasks = (taskList, page, limit) => {
+    const currentPage = parseInt(page) <= 0 ? 1 : parseInt(page);  
+    const specifiedLimit = parseInt(limit) <= 0 ? 5 : parseInt(limit);
+    const startIndex = (currentPage - 1) * specifiedLimit; // retrieving the startingIndex
+    const offset = startIndex + specifiedLimit;
+    const remainingTasks = offset >= taskList.length ? 0 : taskList.length - offset;
+    const paginatedTasks = taskList.slice(startIndex, offset);
+    return ({
+        tasks: paginatedTasks,
+        tasksLeft: remainingTasks
+    });
 }
 
 export const sortTasks = (taskList, orderBy, order) => {

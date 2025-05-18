@@ -1,4 +1,6 @@
-import { createNewTask, fetchTaskDetails, fetchUserTasks, filterTasks, removeTask, sortTasks, updateTaskDetails } from "../services/task.service.js";
+import {
+    createNewTask, fetchTaskDetails, fetchUserTasks, filterTasks, removeTask, sliceTasks, sortTasks, updateTaskDetails
+} from "../services/task.service.js";
 
 export const createTask = async (request, response, next) => {
     try {
@@ -15,15 +17,19 @@ export const createTask = async (request, response, next) => {
 
 export const fetchTasks = async (request, response, next) => {
     try {
-        const { sortBy, order = 'asc', ...filterCriteria} = request.query;
+        const { sortBy, order = 'asc', page = 1, limit = 5, ...filterCriteria} = request.query;
         const userId = request.userId;
 
         let userCreatedTasks = await fetchUserTasks(userId);
         userCreatedTasks = filterTasks(userCreatedTasks, filterCriteria);
         userCreatedTasks = sortTasks(userCreatedTasks, sortBy, order);
+        const { tasks, tasksLeft } = sliceTasks(userCreatedTasks, page, limit);
 
-        if (userCreatedTasks.length > 0) {
-            response.status(200).send(userCreatedTasks);
+        if (tasks.length > 0) {
+            response.status(200).json({
+                tasks,
+                tasksLeft// to help the ui indicate if there are any further tasks to display
+            });
         } else {
             response.status(200).send("No tasks to display");
         }
