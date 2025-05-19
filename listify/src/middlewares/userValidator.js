@@ -1,5 +1,6 @@
 import validator from 'validator';
 
+// Middleware to validate the user
 const validateUser = (request, response, next) => {
     const { userName, password} = request.body || {};
     if (!userName || !password) {

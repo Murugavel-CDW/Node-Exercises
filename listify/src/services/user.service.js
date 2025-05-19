@@ -4,24 +4,27 @@ import { fileDetailsRead } from "../utils/fileRead.js";
 import { fileDetailsWrite } from "../utils/fileWrite.js";
 import generateUniqueID from '../utils/generateID.js';
 
-export const fetchUserByField = async (fieldName, value) => {
+// Fetching the details of user based on the user name
+export const fetchUserByName = async (userName) => {
     const userList = await fileDetailsRead('users'); 
-    const userDetails = userList.find((user) => user[fieldName] === value);
+    const userDetails = userList.find((user) => user.userName === userName);
     return userDetails;
 }
 
+// Function to create a new user
 export const addNewUser = async (userName, password) => {
-    const userId = generateUniqueID();
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const userId = generateUniqueID(); // generating a unique id for the user
+    const hashedPassword = await bcrypt.hash(password, 10); // hashing the password
     const newUser = {
         userId,
         userName,
         password: hashedPassword
     };
-    await fileDetailsWrite('users', newUser);
+    await fileDetailsWrite('users', newUser); // writing the new user to the file
     return newUser;
 }
 
+// Function to generate a new jwt token
 export const generateToken = (userId) => {
     const token = jwt.sign({userId}, process.env.JWT_SECRET_KEY, {
         expiresIn: 30 * 60

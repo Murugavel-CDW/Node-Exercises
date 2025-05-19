@@ -2,8 +2,9 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileDetailsRead } from './fileRead.js';
 
+// Function to write the data into the json file
 export const fileDetailsWrite = async (fileName, data, shouldReplace = false) => {
-    if (shouldReplace) {
+    if (shouldReplace) { // checking for the flag which denotes if the whole data needs to be replaced
         await fs.writeFile(path.resolve(import.meta.dirname, `../data/${fileName}.json`), JSON.stringify(data));
     } else {
         const dataList = await fileDetailsRead(fileName);

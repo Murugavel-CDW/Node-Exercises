@@ -11,17 +11,19 @@ import jwtTokenAuth from './src/middlewares/jwtAuth.js';
 const app = express();
 const port = 3000;
 
-app.use(cors());
+app.use(cors()); // enabling the CORS policy
 
-app.use(express.json());
+app.use(express.json()); 
 
-app.use(logRequests);
+app.use(logRequests); // calling middleware to log all requests
 
 app.use('/users', userRouter);
 
 app.use('/tasks', jwtTokenAuth, taskRouter);
 
+// Handling of any error that is encountered by the server
 app.use((error, request, response, next) => {
+    // Logging the error to the file
     logger.log({
         level: process.env.LOGGER_ERROR_LEVEL,
         message: `Request URL: ${request.url}; Error message: ${error.message}`
