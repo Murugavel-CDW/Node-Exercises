@@ -1,7 +1,6 @@
 import validator from 'validator';
 import { CustomError } from '../errors/customError.js';
-import { fileDetailsRead } from "../utils/fileRead.js";
-import { fileDetailsWrite } from "../utils/fileWrite.js";
+import { fileDetailsRead, fileDetailsWrite } from '../utils/fileOperations.js'; 
 import generateUniqueID from '../utils/generateID.js';
 
 // Function to create timestamps for each entry in the array
@@ -69,7 +68,7 @@ export const sortTasks = (taskList, orderBy, order) => {
         taskList.sort((firstTask, secondTask) => {
             const valueA = firstTask[orderBy];
             const valueB = secondTask[orderBy];
-            if (typeof valueA === 'string') { // if the value is a string
+            if (typeof valueA === 'string' && typeof valueB === 'string') { // if the value is a string
                 return order === 'asc' ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
             } else {
                 return order === 'asc' ? valueA - valueB : valueB - valueA;

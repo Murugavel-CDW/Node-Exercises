@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { fileDetailsRead } from "../utils/fileRead.js";
-import { fileDetailsWrite } from "../utils/fileWrite.js";
+import { fileDetailsRead, fileDetailsWrite } from '../utils/fileOperations.js'; 
 import generateUniqueID from '../utils/generateID.js';
 
 // Fetching the details of user based on the user name
