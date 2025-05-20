@@ -1,5 +1,6 @@
 import path from 'path';
 import { createLogger, format, transports } from 'winston';
+import { LOGGER } from '../constants/urlConstants.js';
 
 const { combine, timestamp, printf } = format;
 
@@ -12,11 +13,11 @@ export const logger = createLogger({
     ),
     transports: [
         new transports.File({
-            filename: path.resolve(import.meta.dirname, "../../logs/error.log"),
+            filename: path.resolve(import.meta.dirname, LOGGER.ERRORLOG),
             level: process.env.LOGGER_ERROR_LEVEL
         }),
         new transports.File({
-            filename: path.resolve(import.meta.dirname, '../../logs/combined.log'),
+            filename: path.resolve(import.meta.dirname, LOGGER.COMBINEDLOG),
             level: process.env.LOGGER_INFO_LEVEL
         })
     ]
