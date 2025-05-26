@@ -1,0 +1,185 @@
+{
+  "users": [
+    {
+      "id": "12345",
+      "email": "murugavel.v@cdw.com",
+      "name": "User000",
+      "role": "co-worker"
+    },
+    {
+      "id": "10001",
+      "email": "test001@cdw.com",
+      "name": "User001",
+      "role": "co-worker"
+    },
+    {
+      "id": "10002",
+      "email": "test002@cdw.com",
+      "name": "User002",
+      "role": "co-worker"
+    },
+    {
+      "id": "10003",
+      "email": "test003@cdw.com",
+      "name": "User003",
+      "role": "co-worker"
+    },
+    {
+      "id": "10004",
+      "email": "test004@cdw.com",
+      "name": "User004",
+      "role": "co-worker"
+    },
+    {
+      "id": "10005",
+      "email": "test005@cdw.com",
+      "name": "User005",
+      "role": "co-worker"
+    },
+    {
+      "id": "10006",
+      "email": "test006@cdw.com",
+      "name": "User006",
+      "role": "co-worker"
+    },
+    {
+      "id": "10007",
+      "email": "test007@cdw.com",
+      "name": "User007",
+      "role": "co-worker"
+    },
+    {
+      "id": "10008",
+      "email": "test008@cdw.com",
+      "name": "User008",
+      "role": "co-worker"
+    },
+    {
+      "id": "10009",
+      "email": "test009@cdw.com",
+      "name": "User009",
+      "role": "co-worker"
+    },
+    {
+      "id": "10010",
+      "email": "test010@cdw.com",
+      "name": "User010",
+      "role": "co-worker"
+    },
+    {
+      "id": "10011",
+      "email": "test011@cdw.com",
+      "name": "User011",
+      "role": "co-worker"
+    },
+    {
+      "id": "10012",
+      "email": "test012@cdw.com",
+      "name": "User012",
+      "role": "co-worker"
+    },
+    {
+      "id": "10013",
+      "email": "test013@cdw.com",
+      "name": "User013",
+      "role": "co-worker"
+    },
+    {
+      "id": "10014",
+      "email": "test014@cdw.com",
+      "name": "User014",
+      "role": "co-worker"
+    },
+    {
+      "id": "10015",
+      "email": "test015@cdw.com",
+      "name": "User015",
+      "role": "co-worker"
+    },
+    {
+      "id": "10016",
+      "email": "test016@cdw.com",
+      "name": "User016",
+      "role": "co-worker"
+    },
+    {
+      "id": "10017",
+      "email": "test017@cdw.com",
+      "name": "User017",
+      "role": "co-worker"
+    },
+    {
+      "id": "10018",
+      "email": "test018@cdw.com",
+      "name": "User018",
+      "role": "co-worker"
+    },
+    {
+      "id": "10019",
+      "email": "test019@cdw.com",
+      "name": "User019",
+      "role": "co-worker"
+    },
+    {
+      "id": "10020",
+      "email": "test020@cdw.com",
+      "name": "User020",
+      "role": "co-worker"
+    },
+    {
+      "id": "10021",
+      "email": "test021@cdw.com",
+      "name": "User021",
+      "role": "co-worker"
+    },
+    {
+      "id": "10022",
+      "email": "test022@cdw.com",
+      "name": "User022",
+      "role": "co-worker"
+    },
+    {
+      "id": "10023",
+      "email": "test023@cdw.com",
+      "name": "User023",
+      "role": "co-worker"
+    },
+    {
+      "id": "10024",
+      "email": "test024@cdw.com",
+      "name": "User024",
+      "role": "co-worker"
+    },
+    {
+      "id": "10025",
+      "email": "test025@cdw.com",
+      "name": "User025",
+      "role": "co-worker"
+    },
+
+    {
+      "id": "11001",
+      "email": "admin001@cdw.com",
+      "name": "Admin001",
+      "role": "admin"
+    },
+    {
+      "id": "11002",
+      "email": "admin002@cdw.com",
+      "name": "Admin002",
+      "role": "admin"
+    },
+    {
+      "id": "11003",
+      "email": "admin003@cdw.com",
+      "name": "Admin003",
+      "role": "admin"
+    },
+    {
+      "id": "11004",
+      "email": "admin004@cdw.com",
+      "name": "Admin004",
+      "role": "admin"
+    }
+  ]
+}
