@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Schema structure for the users collection
 const userSchema = new mongoose.Schema({
     employeeID: String,
     name: {
@@ -34,6 +35,10 @@ const userSchema = new mongoose.Schema({
             type: String
         }
     ],
+    yearsOfExperience: {
+        type: Number,
+        required: true
+    },
     BU: {
         type: String,
         required: true

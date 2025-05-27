@@ -1,8 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-export const createJWTToken = (employeeID, role) => {
+// Function to create payload from the arguments passed and generating a jwt token
+export const createJWTToken = (employeeID, employeeDBId, role) => {
     const payload = {
         employeeID,
+        employeeDBId,
         role
     };
     const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, {

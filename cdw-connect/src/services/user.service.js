@@ -3,6 +3,7 @@ import { User } from "../models/userSchema.js"
 import { fetchUserInWallet } from '../utils/findUser.js';
 import { CustomError } from '../error/customError.js';
 
+// Function to create a user in the DB
 export const createUser = async (userData) => {
     const { email, password, role, employeeID } = userData;
     if (role !== 'co-worker' && role !== 'admin') {
@@ -45,15 +46,18 @@ export const createUser = async (userData) => {
     return user;
 };
 
+// Function to fetch the user from the DB
 export const findUser = async (email, password) => {
     const userDetails = await User.findOne({ email });
     if (!userDetails) {
         throw new CustomError('No such user found', 404);
     }
+    // checking if the provided password and the stored password in db matches
     const isPasswordEqual = await bcrypt.compare(password, userDetails.password);
     if (!isPasswordEqual) {
         throw new CustomError("Invalid password", 400);
     }
+    // checking if the user does not have an approval status
     if (!userDetails.approvalStatus) {
         throw new CustomError("Your account is still waiting for approval", 403);
     }

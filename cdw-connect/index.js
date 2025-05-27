@@ -3,6 +3,8 @@ import cors from 'cors';
 import 'dotenv/config';
 import userRouter from './src/routes/user.route.js';
 import adminRouter from './src/routes/admin.route.js';
+import feedRouter from './src/routes/feed.route.js';
+import commentRouter from './src/routes/comment.route.js';
 import { CustomError } from './src/error/customError.js';
 import { logger } from './src/config/loggerConfig.js';
 import { connectDb } from './src/config/mongooseConnect.js';
@@ -22,7 +24,13 @@ app.use('/users', userRouter);
 
 app.use('/admin', jwtAuth, verifyAdmin, adminRouter);
 
+app.use('/feeds', jwtAuth, feedRouter);
+
+app.use('/comments', jwtAuth, commentRouter);
+
+// Error handler for our server
 app.use((error, request, response, next) => {
+    // logging the error into the error.log file
     logger.log({
         level: process.env.LOGGER_ERROR_LEVEL,
         message: `Request URL: ${request.url} Error message: ${error.message}`

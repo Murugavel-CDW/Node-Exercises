@@ -1,6 +1,7 @@
 import nodemailer from 'nodemailer';
 import { CustomError } from '../error/customError.js';
 
+// Function to send an email to user with the provided email regarding the approval status 
 export const sendEmail = async (email, userName, status) => {
     try {
         const transport = nodemailer.createTransport({
@@ -15,7 +16,7 @@ export const sendEmail = async (email, userName, status) => {
             from: process.env.SENDER_EMAIL,
             to: email,
             subject: "CDW-Connect approval status update",
-            text: `Hi ${userName}, your status has been ${status} by the admin. ${status === 'Approved' ? "You can now login and use the app" : "You should wait for 2 days before trying to register again"}.\nThanks and Regards,\nCDW-Connect`
+            text: `Hi ${userName}, your status has been ${status} by the admin. ${status === 'Approved' ? "You can now login and use the app" : "You should wait for 2 days before trying to register again"}.\n\n\nThanks and Regards,\nCDW-Connect`
         };
     
         await transport.sendMail(messageOptions);

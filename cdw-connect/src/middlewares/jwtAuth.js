@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
-import { CustomError } from "../error/customError.js";
 
+// Middleware function to authenticate the user via JWT token
 export const jwtAuth = (request, response, next) => {
     const token = request.headers['authorization'];
-    if (!token) {
-        return next(new CustomError("Invalid request", 400));
+    if (!token) { // if no credentials is passed to the request
+        return response.status(401).send("Invalid credentials");
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        request.user = decoded;
+        request.user = decoded; // assigning the cred values to the request object in the user field
         next();
     } catch (error) {
         next(error);
