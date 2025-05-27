@@ -1,3 +1,8 @@
+// The whole logic now assumes that the passed data from the user is valid (for any document creation purpose in DB)
+// The implementation of middlewares to validate the data sent from the user for creation is pending
+// Implementation of search and app maintenance feature is pending
+// Creation of indexes for specific fields in db is also pending
+
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
