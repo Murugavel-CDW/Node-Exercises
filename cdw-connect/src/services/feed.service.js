@@ -20,7 +20,7 @@ export const fetchFeedWithComments = async (email) => {
     if (email) {
         aggregationPipeline.push({
             $match: {
-                '$creator.email': email
+                'creator.email': email
             }
         });
     }
