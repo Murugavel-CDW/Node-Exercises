@@ -39,6 +39,11 @@ app.use('/search', jwtAuth, searchRouter);
 
 // Error handler for our server
 app.use((error, request, response, next) => {
+    // if the error is from mongoose validation
+    if (error.name === 'ValidationError') {
+        const messages = Object.values(error.errors).map((err) => err.message);
+        error.message = messages[0];
+    }
     // logging the error into the error.log file
     logger.log({
         level: process.env.LOGGER_ERROR_LEVEL,
@@ -49,11 +54,6 @@ app.use((error, request, response, next) => {
             error: error.message
         });
     } else {
-        // if the error is from mongoose validation
-        if (error.name === 'ValidationError') {
-            const messages = Object.values(error.errors).map((err) => err.message);
-            error.message = messages[0];
-        }
         response.status(500).json({
             error: `Internal server error: ${error.message}`
         });
