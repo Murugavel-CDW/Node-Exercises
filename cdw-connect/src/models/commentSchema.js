@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 const commentSchema = new mongoose.Schema({
     comment: {
         type: String,
-        required: true
+        required: [true, 'Comment is required'],
+        minLength: [2, 'Minimum two characters in comment is required']
     },
     commentedBy: {
         type: mongoose.Schema.ObjectId,

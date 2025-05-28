@@ -1,7 +1,5 @@
-import mongoose from "mongoose";
 import { Post } from "../models/postSchema.js"
-import { fetchFeedWithComments, toggleLikeStatus } from "../services/feed.service.js";
-import { Comment } from "../models/commentSchema.js";
+import { fetchFeedById, fetchFeedWithComments, removeFeed, toggleLikeStatus } from "../services/feed.service.js";
 
 // Function to create a post 
 export const createFeed = async (request, response, next) => {
@@ -41,7 +39,7 @@ export const fetchFeeds = async (request, response, next) => {
 export const fetchFeed = async (request, response, next) => {
     try {
         const { feedID } = request.params;
-        const feedDetails = await Post.findById(feedID);
+        const feedDetails = await fetchFeedById(feedID);
         if (!feedDetails) {
             return response.status(404).json({
                 message: "No such feed found"
@@ -58,26 +56,7 @@ export const deleteFeed = async (request, response, next) => {
     try {
         const { employeeDBId } = request.user;
         const { feedID } = request.params;
-        // checking if the feedID is not a valid ObjectId
-        if (!mongoose.Types.ObjectId.isValid(feedID)) {
-            return response.status(400).json({
-                message: "Invalid feed ID format"
-            });
-        }
-        const postDetails = await Post.findById(feedID);
-        if (!postDetails) {
-            return response.status(404).json({
-                message: "No feed is found"
-            });
-        }
-        // checking if the created user is different from the current user
-        if (postDetails.createdBy.toString() !== employeeDBId) {
-            return response.status(403).json({
-                error: "Access to delete this post is denied"
-            });
-        }
-        await Comment.deleteMany({ postID: feedID }); // deleting the comments associated with the post
-        await Post.deleteOne({ _id: feedID });
+        await removeFeed(employeeDBId, feedID);
         response.status(200).json({
             message: "Post deleted successfully"
         });
@@ -91,9 +70,9 @@ export const toggleLike = async (request, response, next) => {
     try {
         const { employeeDBId } = request.user;
         const { feedID } = request.params;
-        await toggleLikeStatus(employeeDBId, feedID);
+        const deletedCount = await toggleLikeStatus(employeeDBId, feedID);
         response.status(200).json({
-            message: "Comment liked successfully"
+            message: `${deletedCount === 0 ? "Comment liked successfully" : "Comment unliked successfully"}`
         });
     } catch (error) {
         next(error);

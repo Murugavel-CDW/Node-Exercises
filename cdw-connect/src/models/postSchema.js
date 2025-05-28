@@ -4,24 +4,24 @@ import mongoose from "mongoose";
 const postSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: [true, 'Title is required'],
+        minLength: [5, 'Minimum five characters in title is required']
     },
     location: {
         type: String,
-        required: true
+        required: [true, 'Location is required']
     },
     feed: {
         type: String,
-        required: true
+        required: [true, 'Feed Link is required']
     },
     caption: {
         type: String,
-        required: true
+        required: [true, 'Caption is required'],
     },
     createdBy: {
         type: mongoose.Schema.ObjectId,
-        ref: 'Users',
-        required: true
+        ref: 'Users'
     }
 }, {
     timestamps: true
