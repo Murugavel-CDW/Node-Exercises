@@ -63,11 +63,11 @@ app.use((error, request, response, next) => {
 app.listen(process.env.SERVER_PORT, () => {
     connectDb();
     // scheduler for app maintenance by removing left users from the DB
-    cron.schedule('0 20 * * *', async () => {
+    cron.schedule('0 20 * * *', () => {
         clearLeftUsersFromDb();
     });
     // scheduler to remove users whose restricted time has ended so that they can register again
-    cron.schedule('0 0 * * *', async () => {
+    cron.schedule('0 0 * * *', () => {
         clearPassedRestrictedTimeUsers();
     });
     console.log(`Starting up the express server`);
