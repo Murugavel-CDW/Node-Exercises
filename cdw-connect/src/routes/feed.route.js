@@ -14,6 +14,8 @@ feedRouter.get('/:feedID', fetchFeed);
  * @swagger
  * /feeds:
  *   delete:
+ *     tags:
+ *       - Feeds
  *     summary: Feed Removal
  *     description: Deletes the feed with it's id matching to the id passed in the params.
  *     parameters:

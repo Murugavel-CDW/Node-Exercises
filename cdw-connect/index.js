@@ -32,15 +32,25 @@ const swaggerOptions = {
     components: {
       securitySchemes: {
         bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
-        },
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+        }
       },
     },
     servers: [
       {
         url: "http://localhost:3000",
+      },
+    ],
+    tags: [
+      {
+        name: "Users",
+        description: "Endpoints for user registration, login, profile management, etc.",
+      },
+      {
+        name: "Feeds",
+        description: "Endpoints for creating and retrieving feed posts.",
       },
     ],
   },

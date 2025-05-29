@@ -9,6 +9,8 @@ const userRouter = express.Router();
  * @swagger
  * /users/signup:
  *   post:
+ *     tags:
+ *       - Users
  *     summary: User/Admin signup
  *     description: Creates a new user after validating data and marks the approval as pending.
  *     requestBody:
@@ -72,6 +74,8 @@ userRouter.post('/signup', validateUserData, signupUser);
  * @swagger
  * /users/signin:
  *   post:
+ *     tags:
+ *       - Users
  *     summary: User/Admin sigin
  *     description: Logs in the user after validating data.
  *     requestBody:
@@ -103,6 +107,8 @@ userRouter.post('/signin', validateUserData, signinUser);
  * @swagger
  * /users/profile:
  *   get:
+ *     tags:
+ *       - Users
  *     summary: Profile Display
  *     description: Displays the profile of the authenticated user.
  *     security:
@@ -119,6 +125,8 @@ userRouter.get('/profile', jwtAuth, displayProfile);
  * @swagger
  * /users/profile:
  *   patch:
+ *     tags:
+ *       - Users
  *     summary: Profile Updation
  *     description: Updates the profile details of the authenticated user.
  *     requestBody:
