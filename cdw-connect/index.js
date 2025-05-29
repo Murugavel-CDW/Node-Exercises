@@ -62,10 +62,12 @@ const swaggerDoc = swaggerJSDoc(swaggerOptions);
 
 const app = express();
 
+// Enabling the CORS policy
 app.use(cors());
 
 app.use(express.json());
 
+// Securing our response headers
 app.use(helmet());
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
