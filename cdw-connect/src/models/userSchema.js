@@ -5,17 +5,15 @@ const userSchema = new mongoose.Schema({
     employeeID: String,
     name: {
         type: String,
-        required: [true, 'Name is required'],
-        minLength: [6, 'Minimum six characters in name is required']
+        required: [true, 'Name is required']
     },
     email: {
         type: String,
-        required: [true, 'Enail is required']
+        required: [true, 'Email is required']
     },
     password: {
         type: String,
-        required: [true, 'Password is required'],
-        minLength: [8, 'Minimum eight characters in password is required']
+        required: [true, 'Password is required']
     },
     gender: {
         type: String,
@@ -40,7 +38,6 @@ const userSchema = new mongoose.Schema({
     ],
     yearsOfExperience: {
         type: Number,
-        min: [0, 'Negative values are not supported'],
         required: [true, 'Years of experience is required']
     },
     BU: {
@@ -63,5 +60,9 @@ const userSchema = new mongoose.Schema({
         type: Date
     }
 });
+
+userSchema.index({ email: 1 });
+
+userSchema.index({ employeeID: 1 });
 
 export const User = mongoose.model('Users', userSchema);

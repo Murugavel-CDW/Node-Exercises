@@ -1,10 +1,12 @@
-// The implementation of middlewares to validate the urls and other format data sent from the user for creation is pending
 // Creation of indexes for specific fields in db is also pending
 
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import cron from 'node-cron';
+import helmet from 'helmet';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 import userRouter from './src/routes/user.route.js';
 import adminRouter from './src/routes/admin.route.js';
 import feedRouter from './src/routes/feed.route.js';
@@ -19,11 +21,44 @@ import { logRequests } from './src/middlewares/requestLogger.js';
 import { clearLeftUsersFromDb } from './src/jobs/clearUsers.js';
 import { clearPassedRestrictedTimeUsers } from './src/jobs/clearRestrictedUsers.js';
 
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0", // OpenAPI 3.0 specification
+    info: {
+      title: "CDW-Connect",      
+      version: "1.0.0", 
+      description: "API Documentation for CDW's internal social media REST APIs", // A short description of your API
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+      },
+    ],
+  },
+  // Paths to files containing OpenAPI definitions in JSDoc comments
+  apis: ["./src/routes/*.js"],
+};
+
+const swaggerDoc = swaggerJSDoc(swaggerOptions);
+
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
+
+app.use(helmet());
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use(logRequests);
 
@@ -54,8 +89,9 @@ app.use((error, request, response, next) => {
             error: error.message
         });
     } else {
-        response.status(500).json({
-            error: `Internal server error: ${error.message}`
+        const errorMessage = error.name === 'ValidationError' ? error.message : `Internal server error: ${error.message}`;
+        response.status(error.name === 'ValidationError' ? 400 : 500).json({
+            error: errorMessage
         });
     }
 })
