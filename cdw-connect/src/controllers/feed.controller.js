@@ -1,16 +1,11 @@
-import { Post } from "../models/postSchema.js"
-import { fetchFeedById, fetchFeedWithComments, removeFeed, toggleLikeStatus } from "../services/feed.service.js";
+import { createAndStoreFeed, fetchFeedById, fetchFeedWithComments, removeFeed, toggleLikeStatus } from "../services/feed.service.js";
 
 // Function to create a post 
 export const createFeed = async (request, response, next) => {
     try {
         const { employeeDBId } = request.user;
         const feedData = request.body;
-        const feed = new Post({
-            ...feedData,
-            createdBy: employeeDBId
-        });
-        await feed.save();
+        await createAndStoreFeed(feedData, employeeDBId);
         response.status(201).json({
             message: "Feed created successfully"
         });

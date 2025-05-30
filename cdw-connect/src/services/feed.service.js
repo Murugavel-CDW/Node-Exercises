@@ -4,6 +4,15 @@ import { Like } from "../models/likeSchema.js";
 import { Comment } from "../models/commentSchema.js";
 import { CustomError } from "../error/customError.js";
 
+// Function to create and store the feed in the DB
+export const createAndStoreFeed = async (feedData, employeeDBId) => {
+    const feed = new Post({
+        ...feedData,
+        createdBy: employeeDBId
+    });
+    await feed.save();
+}
+
 // Function to fetch the posts along with its comments
 export const fetchFeedWithComments = async (email) => {
     // Dynamically constructing our aggregation pipeline for mongoDB query
@@ -46,7 +55,7 @@ export const fetchFeedById = async (feedID) => {
     return await Post.findById(feedID);
 }
 
-// Function to remove a
+// Function to remove a feed
 export const removeFeed = async (employeeDBId, feedID) => {
     if (!mongoose.Types.ObjectId.isValid(feedID)) {
         throw new CustomError("Invalid feed ID format", 400);
@@ -68,6 +77,10 @@ export const removeFeed = async (employeeDBId, feedID) => {
 export const toggleLikeStatus = async (employeeDBId, feedID) => {
     if (!mongoose.Types.ObjectId.isValid(feedID)) {
         throw new CustomError("Invalid feed ID format", 400);
+    }
+    const postDetails = await Post.findById(feedID);
+    if (!postDetails) {
+        throw new CustomError("No feed is found", 404);
     }
     const result = await Like.deleteOne({ likedBy: employeeDBId, postID: feedID });
     // checking if any document has been deleted and if not (i.e first time liking) then create a document in the likes collection
