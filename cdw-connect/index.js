@@ -18,6 +18,7 @@ import { verifyAdmin } from './src/middlewares/adminAuthorize.js';
 import { logRequests } from './src/middlewares/requestLogger.js';
 import { clearLeftUsersFromDb } from './src/jobs/clearUsers.js';
 import { clearPassedRestrictedTimeUsers } from './src/jobs/clearRestrictedUsers.js';
+import { scheduleJobWithMaintenance, getMaintenanceStatus } from './src/utils/maintenance.js';
 
 const swaggerOptions = {
   swaggerDefinition: {
@@ -72,6 +73,17 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use(logRequests);
 
+// Checks if the status of the app is currently under maintenance
+app.use((request, response, next) => {
+  const isUnderMaintenance = getMaintenanceStatus();
+  if (isUnderMaintenance) {
+    return response.status(503).json({
+      message: "App is currently under maintenance. Try again later."
+    });
+  }
+  next();
+});
+
 app.use('/users', userRouter);
 
 app.use('/admin', jwtAuth, verifyAdmin, adminRouter);
@@ -110,11 +122,11 @@ app.listen(process.env.SERVER_PORT, () => {
     connectDb();
     // scheduler for app maintenance by removing left users from the DB
     cron.schedule('0 20 * * *', () => {
-        clearLeftUsersFromDb();
+        scheduleJobWithMaintenance(clearLeftUsersFromDb);
     });
     // scheduler to remove users whose restricted time has ended so that they can register again
     cron.schedule('0 0 * * *', () => {
-        clearPassedRestrictedTimeUsers();
+        scheduleJobWithMaintenance(clearPassedRestrictedTimeUsers);
     });
     console.log(`Starting up the express server`);
 });
